@@ -4,7 +4,7 @@
 
 <section>
   {#await $currentRoute?.component}
-    Loading...
+    <!-- nothing -->
   {:then Component}
     <Component {...$currentRoute.props}></Component>
   {:catch error}

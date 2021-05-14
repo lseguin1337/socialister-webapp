@@ -7,7 +7,7 @@
   import { routing } from '../routes/router';
 </script>
 
-<div class="Nav--container" class:routing={$routing}>
+<div class="Nav--container" class:loading={$routing}>
   <Container>
     <nav>
       <div class="Nav--left Nav--block">
@@ -34,6 +34,10 @@
 
 
 <style>
+  @keyframes loading {
+    from { border-top-color: rgb(75, 138, 231); }
+    to   { border-top-color: #fff; }
+  }
   .Nav--container {
     width: 100%;
     background-color: #fff;
@@ -43,8 +47,8 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.05),0 1px 4px rgba(0,0,0,0.05),0 2px 8px rgba(0,0,0,0.05);
   }
 
-  .Nav--container.routing {
-    border-top: 4px solid greenyellow;
+  .Nav--container.loading {
+    animation: .1s linear 0s infinite alternate loading;
   }
 
   nav {

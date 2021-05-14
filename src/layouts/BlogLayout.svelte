@@ -9,7 +9,4 @@
 </Container>
 
 <style>
-  .BlogLayout--container {
-
-  }
 </style>
