@@ -8,6 +8,15 @@ interface Route {
   requireAuth?: boolean;
 }
 
+function routeChange(handler: Function) {
+  window.addEventListener("hashchange", handler as any, false);
+  handler();
+
+  return () => {
+    window.removeEventListener("hashchange", handler as any, false);
+  };
+}
+
 export function useRouter(routes: Route[]) {
   const route = ref({ path: '', props: {}, component: new Promise<any>(() => {}) } as Route);
 
@@ -25,10 +34,45 @@ export function useRouter(routes: Route[]) {
     route.value = current;
   }
 
-  window.addEventListener("hashchange", updateRoute, false);
-  updateRoute();
+  routeChange(updateRoute);
 
   return {
     route
+  };
+}
+
+export function route(element: HTMLElement, path: string) {
+  function redirectTo() {
+    location.href = `#${path}`;
+  }
+
+  function updateActive() {
+    console.log('CHANGE');
+    const isActive = location.hash.replace(/^#/, '') === path;
+    if (isActive)
+      element.classList.add('route-active');
+    else
+      element.classList.remove('route-active');
+  }
+
+  function updatePath(newPath: string) {
+    path = newPath;
+    if (element.localName === 'a')
+      element.setAttribute('href', `#${path}`);
+    
+  }
+
+  if (element.localName !== 'a')
+      element.addEventListener('click', redirectTo);
+
+  updatePath(path);
+  const unsubscribeRouteChange = routeChange(updateActive);
+
+  return {
+    update: updatePath,
+    destroy() {
+      element.removeEventListener('click', redirectTo);
+      unsubscribeRouteChange();
+    }
   };
 }

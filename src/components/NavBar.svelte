@@ -1,5 +1,7 @@
+<!-- svelte-ignore a11y-missing-attribute -->
 <script lang="typescript">
   import { user } from '../composables/user';
+  import { route } from '../composables/router';
 </script>
 
 <nav>
@@ -7,21 +9,21 @@
   </div>
 
   <div class="Nav--middle Nav--block">
-    <a class="Nav--menu" href="#/home">Home</a>
+    <a class="Nav--menu" use:route={'/'}>Home</a>
     {#if $user}
-      <a class="Nav--menu" href="#/overview">Overview</a>
-      <a class="Nav--menu" href="#/settings">Settings</a>
+      <a class="Nav--menu" use:route={'/overview'}>Overview</a>
+      <a class="Nav--menu" use:route={'/settings'}>Settings</a>
     {/if}
   </div>
 
   <div class="Nav--right Nav--block">
     {#if $user}
-      <a class="Nav--menu Account" href="#/account">
+      <a class="Nav--menu Account" use:route={'/account'}>
         <img class="UserPicture" alt="user" src="https://media-exp1.licdn.com/dms/image/C4D03AQFep90NzFnV7Q/profile-displayphoto-shrink_400_400/0/1594025388118?e=1626307200&v=beta&t=Gumaay8Ftv6iAaY9NN-RD-TUnO_D3SN7UgRp1XB-_ZI" />
         { $user.username }
       </a>
     {:else}
-      <a class="Nav--menu" href="#/login">Login</a>
+      <a class="Nav--menu" use:route={'/login'}>Login</a>
     {/if}
   </div>
 </nav>
@@ -59,6 +61,10 @@
     text-decoration: none;
     border-radius: 8px;
     transition: background-color 0.2s, color 0.2s;
+  }
+
+  .Nav--menu:global(.route-active) {
+    color: rgb(75, 138, 231);
   }
 
   .Nav--menu:hover {
