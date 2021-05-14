@@ -6,10 +6,13 @@
 
 <nav>
   <div class="Nav--left Nav--block">
+    <a class="Nav--menu WebSiteLogo" use:route={'/'}>
+      <img class="LogoIcon" alt="user" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Creative-Tail-People-man-2.svg/256px-Creative-Tail-People-man-2.svg.png" />
+      <b>So</b>cialister
+    </a>
   </div>
 
   <div class="Nav--middle Nav--block">
-    <a class="Nav--menu" use:route={'/'}>Home</a>
     {#if $user}
       <a class="Nav--menu" use:route={'/overview'}>Overview</a>
       <a class="Nav--menu" use:route={'/settings'}>Settings</a>
@@ -38,13 +41,21 @@
     border-bottom: 1px solid rgb(209, 214, 223);
   }
 
+  .WebSiteLogo,
   .Account {
     display: flex;
     justify-content: center;
     justify-items: center;
+    align-items: center;
   }
 
   .UserPicture {
+    border-radius: 50%;
+    width: 20px;
+    margin-right: 5px;
+  }
+
+  .LogoIcon {
     border-radius: 50%;
     width: 20px;
     margin-right: 5px;
@@ -63,11 +74,11 @@
     transition: background-color 0.2s, color 0.2s;
   }
 
-  .Nav--menu:global(.route-active) {
+  .Nav--menu:global(.route-active):not(.WebSiteLogo) {
     color: rgb(75, 138, 231);
   }
 
-  .Nav--menu:hover {
+  .Nav--menu:hover:not(.WebSiteLogo) {
     color: rgb(75, 138, 231);
     background-color: rgba(0,0,0,0.05);
     border-radius: 8px;
