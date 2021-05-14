@@ -16,6 +16,6 @@ export function ref<T>(v: T) {
   return sync(Object.assign(r, { set: (l) => r.value = l }));
 }
 
-export function compute<T>(compute: () => T): Reactive<T> {
+export function computed<T>(compute: () => T): Reactive<T> {
   return sync(basicComputed(compute));
 }

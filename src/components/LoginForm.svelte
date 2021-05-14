@@ -11,9 +11,11 @@
 </script>
 
 <div class="LoginForm--container">
+  <h1>Connexion</h1>
+
   <div class="LoginForm--entry">
     <label for="-1">Email:</label>
-    <csm-input  placeholder="email" type="email" on:csmChange={(event) => email = event.detail.value}></csm-input>
+    <csm-input placeholder="email" type="email" on:csmChange={(event) => email = event.detail.value}></csm-input>
   </div>
   
   <div class="LoginForm--entry">
@@ -33,8 +35,17 @@
 </div>
 
 <style>
+  label {
+    color: rgb(61, 61, 61);
+  }
+
   .LoginForm--container {
     width: 400px;
+    padding: 25px;
+    background-color: rgb(255, 255, 255);
+    
+    border-radius: 1px;
+    border: 1px solid rgb(209, 214, 223);
   }
 
   .LoginForm--footer {
@@ -43,6 +54,7 @@
     align-items: center;
     justify-content: center;
     padding: 3px;
+    height: 35px;
   }
 
   .LoginForm--entry {

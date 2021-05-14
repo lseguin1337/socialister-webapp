@@ -5,7 +5,10 @@ export const user = ref(null as { username: string, email: string });
 export const jwt = ref(localStorage.getItem('jwtToken') as string);
 
 jwt.subscribe((value) => {
-  localStorage.setItem('jwtToken', value);
+  if (value)
+    localStorage.setItem('jwtToken', value);
+  else
+    localStorage.removeItem('jwtToken');
 });
 
 export async function login(email: string, _: string) {
@@ -17,20 +20,26 @@ export async function login(email: string, _: string) {
         email,
       };
       resolve(user.value);
-    }, 1500);
+    }, 300);
   });
 }
 
+export async function logout() {
+  jwt.value = null;
+  user.value = null;
+}
+
 export async function me() {
+  const { send } = useRequest('GET', '/api/me');
   if (!jwt.value) {
     return null;
   }
-  // TODO: recover the user
+  user.value = await send();
+  return user.value;
 }
 
 export async function futureLogin(email: string, password: string) {
-  const { post } = useRequest();
-  const userResponse = await post('/api/login', { email, password });
-  user.value = userResponse as any;
-  return userResponse;
+  const { send } = useRequest('POST', '/api/login');
+  user.value = await send({ email, password });
+  return user.value;
 }

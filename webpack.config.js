@@ -4,7 +4,6 @@ const { join } = require('path');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
-  devtool: 'inline-source-map',
   entry: {
     'app': join(__dirname, 'src/main.ts'),
   },
