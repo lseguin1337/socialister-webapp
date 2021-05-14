@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "experimentalDecorators": true,
+    "module": "esnext",
     "sourceMap": false,
     "types": ["svelte"],
     "lib": ["es2017", "dom"],

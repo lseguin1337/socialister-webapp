@@ -23,12 +23,13 @@
   main {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     width: 100vw;
-    overflow: hidden;
   }
 
   .App--header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
   }
 
   .App--content {

@@ -28,7 +28,7 @@
       {#if !connection$}
         <csm-button primary on:csmClick={submit}>Login</csm-button>
       {:else}
-        <csm-spinner size="medium"></csm-spinner>
+        <csm-spinner size="small"></csm-spinner>
       {/if}
     </footer>
   </div>
@@ -40,12 +40,9 @@
   }
 
   .LoginForm--container {
-    width: 400px;
     padding: 25px;
     background-color: rgb(255, 255, 255);
-    
-    border-radius: 1px;
-    border: 1px solid rgb(209, 214, 223);
+    border-radius: 5px;
   }
 
   .LoginForm--footer {

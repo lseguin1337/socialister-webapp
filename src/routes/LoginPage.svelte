@@ -1,4 +1,6 @@
 <script lang="typescript">
+  import Container from '../components/Container.svelte';
+
   import LoginForm from '../components/LoginForm.svelte';
   import { user } from '../composables/user';
 
@@ -6,7 +8,9 @@
 </script>
 
 <div class="LoginPage--container">
-  <LoginForm></LoginForm>
+  <Container width={400}>
+    <LoginForm></LoginForm>
+  </Container>
 </div>
 
 <style>

@@ -19,25 +19,34 @@ function routeChange(handler: Function) {
 
 export function useRouter(routes: Route[]) {
   const route = ref({ path: '', props: {}, component: new Promise<any>(() => {}) } as Route);
+  const routing = ref(false);
 
-  function updateRoute() {
-    const path = location.hash.replace(/^#/, '') || '/';
-    const current = routes.find((r) => {
-      return typeof r.path === 'string' ? path === r.path : path.match(r.path);
-    });
-    if (!current) {
-      return location.href = '#/';
+  async function updateRoute() {
+    try {
+      routing.value = true;
+      const path = location.hash.replace(/^#/, '') || '/';
+      const current = routes.find((r) => {
+        return typeof r.path === 'string' ? path === r.path : path.match(r.path);
+      });
+      if (!current) {
+        return location.href = '#/';
+      }
+      if (current.requireAuth && !user.value) {
+        return location.href = '#/login';
+      }
+      await current.component;
+      route.value = current;
+    } finally {
+      routing.value = false;
     }
-    if (current.requireAuth && !user.value) {
-      return location.href = '#/login';
-    }
-    route.value = current;
   }
 
   routeChange(updateRoute);
+  user.subscribe(updateRoute);
 
   return {
-    route
+    route,
+    routing,
   };
 }
 
@@ -47,7 +56,6 @@ export function route(element: HTMLElement, path: string) {
   }
 
   function updateActive() {
-    console.log('CHANGE');
     const isActive = location.hash.replace(/^#/, '') === path;
     if (isActive)
       element.classList.add('route-active');
