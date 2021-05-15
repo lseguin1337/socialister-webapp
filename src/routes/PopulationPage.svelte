@@ -1,10 +1,12 @@
-<script>
+<script lang="typescript">
   import BoardLayout from "../layouts/BoardLayout.svelte";
+
+  export let pop: any;
 </script>
 
 <BoardLayout>
   <div>
-    Settings content
+    Population PageId { JSON.stringify(pop) }
   </div>
 </BoardLayout>
 

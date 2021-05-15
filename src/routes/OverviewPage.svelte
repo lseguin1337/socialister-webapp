@@ -11,10 +11,7 @@
 </script>
 
 <BoardLayout>
-  <nav slot="menu">
-    hello menu
-  </nav>
-  <div slot="content">
+  <div>
     <div class="chart-container">
       My first chart
       <csm-chart {data}></csm-chart>

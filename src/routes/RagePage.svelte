@@ -1,10 +1,10 @@
-<script>
+<script lang="typescript">
   import BoardLayout from "../layouts/BoardLayout.svelte";
 </script>
 
 <BoardLayout>
   <div>
-    Settings content
+    Rage Page
   </div>
 </BoardLayout>
 

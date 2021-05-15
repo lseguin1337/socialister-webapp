@@ -75,11 +75,15 @@
 
   .Nav--menu {
     padding: 5px 10px;
-    color: #000;
+    color: rgba(0,0,0,0.5);
     margin: 5px;
     text-decoration: none;
     border-radius: 8px;
     transition: background-color 0.2s, color 0.2s;
+  }
+
+  .Nav--menu.WebSiteLogo {
+    color: #000;
   }
 
   .Nav--menu:global(.route-active):not(.WebSiteLogo) {
@@ -90,16 +94,5 @@
     color: rgb(75, 138, 231);
     background-color: rgba(0,0,0,0.05);
     border-radius: 8px;
-  }
-
-  .signup {
-    border: 1px solid rgba(0,0,0,0.45);
-    color: rgba(0,0,0,0.5);
-    background-color: #fff !important;
-  }
-
-  .signup:hover {
-    border: 1px solid rgba(75, 138, 231, 0.9);
-    background-color: #fff 
   }
 </style>

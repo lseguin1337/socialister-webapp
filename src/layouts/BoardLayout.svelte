@@ -9,7 +9,7 @@
       <LeftNav></LeftNav>
     </div>
     <div class="BoardLayout--content">
-      <slot name="content"></slot>
+      <slot></slot>
     </div>
   </div>
 </Container>

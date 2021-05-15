@@ -5,9 +5,9 @@
 <div class="LeftNav--container">
   <csm-select-item class="Menu" use:routeLink={'overview'} left-icon={'quantify'}>Overview</csm-select-item>
   <csm-select-divider></csm-select-divider>
-  <csm-select-item class="Menu" left-icon={'favorite'}>Users Stars</csm-select-item>
-  <csm-select-item class="Menu" left-icon={'segment'}>Population</csm-select-item>
-  <csm-select-item class="Menu" left-icon={'rage-click'}>Haine</csm-select-item>
+  <csm-select-item class="Menu" use:routeLink={'stars'} left-icon={'favorite'}>Users Stars</csm-select-item>
+  <csm-select-item class="Menu" use:routeLink={['population', { popId: 5 }]} left-icon={'segment'}>Population</csm-select-item>
+  <csm-select-item class="Menu" use:routeLink={'rage'} left-icon={'rage-click'}>Haine</csm-select-item>
   <csm-select-divider></csm-select-divider>
   <csm-select-item class="Menu" use:routeLink={'settings'} left-icon={'settings'}>Settings</csm-select-item>
 </div>

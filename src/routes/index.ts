@@ -5,7 +5,7 @@ import { user } from '../composables/user';
 
 function authGuard() {
   if (!user.value) {
-    router.navigate('login');
+    navigate('login');
     return false;
   }
   return true;
@@ -23,6 +23,11 @@ export const router = createRouter([
     loader: () => import('./LoginPage.svelte').then(m => m.default),
   },
   {
+    name: 'signup',
+    path: '/signup',
+    loader: () => import('./SignupPage.svelte').then(m => m.default),
+  },
+  {
     name: 'settings',
     path: '/settings',
     guards: [authGuard],
@@ -34,7 +39,30 @@ export const router = createRouter([
     guards: [authGuard],
     loader: () => import('./OverviewPage.svelte').then(m => m.default),
   },
+  {
+    name: 'rage',
+    path: '/rage',
+    guards: [authGuard],
+    loader: () => import('./RagePage.svelte').then(m => m.default),
+  },
+  {
+    name: 'stars',
+    path: '/stars',
+    guards: [authGuard],
+    loader: () => import('./StarsPage.svelte').then(m => m.default),
+  },
+  {
+    name: 'population',
+    path: '/population/:popId',
+    guards: [authGuard],
+    paramsToProps: async ({ popId }) => {
+      // load popId
+      return {
+        pop: { id: popId },
+      };
+    },
+    loader: () => import('./PopulationPage.svelte').then(m => m.default),
+  },
 ]);
 
-export const routeLink = router.routeLink;
-export const routing = router.routing;
+export const { routing, routeLink, navigate } = router;

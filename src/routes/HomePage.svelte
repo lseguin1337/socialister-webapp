@@ -1,6 +1,5 @@
 <script lang="typescript">
   import BlogLayout from "../layouts/BlogLayout.svelte";
-
 </script>
 
 <BlogLayout>
