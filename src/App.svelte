@@ -1,6 +1,7 @@
 <script lang="typescript">
   import NavBar from './components/NavBar.svelte';
-  import Router from './routes/Router.svelte';
+  import { RouterComponent } from './lib/router';
+  import { router } from './routes';
   import { me } from './composables/user';
 
   const loading$ = me().catch(() => {});
@@ -14,7 +15,7 @@
       <NavBar></NavBar>
     </div>
     <div class="App--content">
-      <Router></Router>
+      <RouterComponent {router}></RouterComponent>
     </div>
   {/await}
 </main>

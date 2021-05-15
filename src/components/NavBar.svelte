@@ -1,17 +1,16 @@
 <!-- svelte-ignore a11y-missing-attribute -->
 <script lang="typescript">
   import { user } from '../composables/user';
-  import { route } from '../composables/router';
   import AccountMenu from './AccountMenu.svelte';
   import Container from './Container.svelte';
-  import { routing } from '../routes/router';
+  import { routeLink, routing } from '../routes';
 </script>
 
 <div class="Nav--container" class:loading={$routing}>
   <Container>
     <nav>
       <div class="Nav--left Nav--block">
-        <a class="Nav--menu WebSiteLogo" use:route={'/'}>
+        <a class="Nav--menu WebSiteLogo" use:routeLink={'home'}>
           <img class="LogoIcon" alt="user" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Creative-Tail-People-man-2.svg/256px-Creative-Tail-People-man-2.svg.png" />
           <b>So</b>cialister
         </a>
@@ -24,8 +23,8 @@
         {#if $user}
           <AccountMenu user={$user}></AccountMenu>
         {:else}
-          <a class="Nav--menu signup" use:route={'/signup'}>Sign-up</a>
-          <a class="Nav--menu" use:route={'/login'}>Login</a>
+          <a class="Nav--menu signup" use:routeLink={'signup'}>Sign-up</a>
+          <a class="Nav--menu" use:routeLink={'login'}>Login</a>
         {/if}
       </div>
     </nav>

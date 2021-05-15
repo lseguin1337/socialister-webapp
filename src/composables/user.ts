@@ -1,4 +1,5 @@
 import { ref } from '../lib/reactive';
+import { router } from '../routes';
 import { useRequest } from './request';
 
 export const user = ref(null as { username: string, email: string });
@@ -27,6 +28,7 @@ export async function login(email: string, _: string) {
 export async function logout() {
   jwt.value = null;
   user.value = null;
+  router.navigate('login');
 }
 
 export async function me() {

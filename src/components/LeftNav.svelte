@@ -1,15 +1,15 @@
 <script lang="typescript">
-  import { route } from '../composables/router';
+  import { routeLink } from '../routes';
 </script>
 
 <div class="LeftNav--container">
-  <csm-select-item class="Menu" use:route={'/overview'} left-icon={'quantify'}>Overview</csm-select-item>
+  <csm-select-item class="Menu" use:routeLink={'overview'} left-icon={'quantify'}>Overview</csm-select-item>
   <csm-select-divider></csm-select-divider>
   <csm-select-item class="Menu" left-icon={'favorite'}>Users Stars</csm-select-item>
   <csm-select-item class="Menu" left-icon={'segment'}>Population</csm-select-item>
   <csm-select-item class="Menu" left-icon={'rage-click'}>Haine</csm-select-item>
   <csm-select-divider></csm-select-divider>
-  <csm-select-item class="Menu" use:route={'/settings'} left-icon={'settings'}>Settings</csm-select-item>
+  <csm-select-item class="Menu" use:routeLink={'settings'} left-icon={'settings'}>Settings</csm-select-item>
 </div>
 
 <style>

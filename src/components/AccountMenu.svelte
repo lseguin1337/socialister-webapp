@@ -1,5 +1,5 @@
 <script lang="typescript">
-  import { route } from "../composables/router";
+  import { routeLink } from "../routes";
   import { logout } from "../composables/user";
 
   export let user: any;
@@ -17,7 +17,7 @@
     <div class="AccountMenu--dropdown">
       <csm-dropdown-list> 
         <csm-select-item left-icon="user">My Account</csm-select-item>
-        <csm-select-item left-icon="quantify" use:route={'/overview'}>Analyse</csm-select-item>
+        <csm-select-item left-icon="quantify" use:routeLink={'overview'}>Analyse</csm-select-item>
         <csm-select-divider></csm-select-divider>
         <csm-select-item left-icon="cancel" on:click={() => logout()}>Disconnect</csm-select-item>
       </csm-dropdown-list>
