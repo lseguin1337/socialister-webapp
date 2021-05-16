@@ -1,0 +1,29 @@
+{
+  "name": "Socialister App",
+  "description": "Socialister understand human interaction",
+  "keywords": [
+    "productivity",
+    "HTML5"
+  ],
+  "repository": "https://github.com/lseguin1337/socialister-webapp",
+  "logo": "https://small-sharp-tool.com/logo.svg",
+  "success_url": "/index.html",
+  "env": {
+    "REFRESH_SECRET": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "ACCESS_SECRET": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ]
+}
