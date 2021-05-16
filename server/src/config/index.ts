@@ -8,6 +8,12 @@ function parseUrl(url: string) {
     username: u.username,
     password: u.password,
     database: u.pathname.replace(/^\//, ''),
+    ssl: true,
+    extra: {
+      ssl: {
+        rejectUnauthorized: false
+      }
+    }
   };
 }
 
