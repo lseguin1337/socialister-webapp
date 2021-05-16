@@ -10,12 +10,12 @@ export class AdminUser1621168618763 implements MigrationInterface {
         admin.password = User.hashPassword(admin.salt, process.env.ADMIN_PASSWORD || 'admin');
         admin.email = process.env.ADMIN_EMAIL || 'admin@support.com';
         
-        await queryRunner.query(`INSERT INTO "user" ("username", "password", "salt", "email", "roles") VALUES (?, ?, ?, ?, ?)`, [
+        await queryRunner.query(`INSERT INTO "user" ("username", "password", "salt", "email", "roles") VALUES ($1, $2, $3, $4, $5)`, [
             admin.username,
             admin.password,
             admin.salt,
             admin.email,
-            'admin',
+            ['admin'],
         ]);
     }
 
