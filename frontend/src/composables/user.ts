@@ -16,7 +16,9 @@ export async function login(username: string, password: string) {
   const { send } = useRequest('POST', '/api/auth/login');
   const { access_token } = await send({ username, password });
   jwt.value = access_token;
-  return me();
+  const user = await me();
+  router.navigate('overview');
+  return user;
 }
 
 export async function logout() {
@@ -27,6 +29,12 @@ export async function logout() {
   router.navigate('login');
 }
 
+export async function refresh() {
+  const { send } = useRequest('POST', '/api/auth/refresh');
+  const { access_token } = await send();
+  jwt.value = access_token;
+}
+
 export async function me() {
   if (!jwt.value) {
     return null;
@@ -34,10 +42,4 @@ export async function me() {
   const { send } = useRequest('GET', '/api/users/me');
   user.value = await send();
   return user.value;
-}
-
-export async function refresh() {
-  const { send } = useRequest('POST', '/api/auth/refresh');
-  const { access_token } = await send();
-  jwt.value = access_token;
 }

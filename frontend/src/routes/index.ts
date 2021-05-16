@@ -11,6 +11,14 @@ function authGuard() {
   return true;
 }
 
+function notAuthGuard() {
+  if (user.value) {
+    navigate('overview');
+    return false;
+  }
+  return true;
+}
+
 export const router = createRouter([
   {
     name: 'home',
@@ -20,11 +28,13 @@ export const router = createRouter([
   {
     name: 'login',
     path: '/login',
+    guards: [notAuthGuard],
     loader: () => import('./LoginPage.svelte').then(m => m.default),
   },
   {
     name: 'signup',
     path: '/signup',
+    guards: [notAuthGuard],
     loader: () => import('./SignupPage.svelte').then(m => m.default),
   },
   {

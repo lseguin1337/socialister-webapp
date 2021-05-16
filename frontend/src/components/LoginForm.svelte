@@ -4,23 +4,50 @@
   let email: string;
   let password: string;
   let connection$: Promise<any>;
+  let message: string;
+  let toast: HTMLElement & { open: () => void };
 
-  function submit() {
-    connection$ = login(email, password);
+  async function submit() {
+    if (connection$) {
+      return;
+    }
+    message = '';
+    try {
+      await (connection$ = login(email, password));
+    } catch (err) {
+      message = 'Not Authorized';
+    } finally {
+      connection$ = null;
+      password = '';
+    }  
   }
+
+  $: message && toast?.open();
 </script>
 
-<div class="LoginForm--container">
+<csm-toast
+  bind:this={toast}
+  style="top: 80px; z-index: 90"
+  timeout={3000}
+  pause-on-hover={true}
+  severity="error"
+  display-close-icon={true}
+>
+  <div class="ErrorMessage">{ message }</div>
+</csm-toast>
+
+
+<div class="LoginForm--container" on:keypress={(e) => e.charCode === 13 && submit()}>
   <h1>Connexion</h1>
 
   <div class="LoginForm--entry">
     <label for="-1">Email:</label>
-    <csm-input placeholder="email" type="email" on:csmChange={(event) => email = event.detail.value}></csm-input>
+    <csm-input name="email" placeholder="email" type="email" value={email} on:csmChange={(event) => email = event.detail.value}></csm-input>
   </div>
   
   <div class="LoginForm--entry">
     <label for="-1">Password:</label>
-    <csm-input placeholder="password" type="password" on:csmChange={(event) => password = event.detail.value}></csm-input>
+    <csm-input name="password" placeholder="password" type="password" value={password} on:csmChange={(event) => password = event.detail.value}></csm-input>
   </div>
 
   <div class="LoginForm--entry">
@@ -39,6 +66,10 @@
     color: rgb(61, 61, 61);
   }
 
+  .ErrorMessage {
+    color: red;
+  }
+
   .LoginForm--container {
     padding: 25px;
     background-color: rgb(255, 255, 255);
@@ -47,7 +78,7 @@
 
   .LoginForm--footer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 3px;

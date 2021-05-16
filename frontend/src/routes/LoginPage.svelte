@@ -1,11 +1,7 @@
 <script lang="typescript">
-  import { navigate } from '.';
   import Container from '../components/Container.svelte';
 
   import LoginForm from '../components/LoginForm.svelte';
-  import { user } from '../composables/user';
-
-  $: if ($user) navigate('overview');
 </script>
 
 <div class="LoginPage--container">
