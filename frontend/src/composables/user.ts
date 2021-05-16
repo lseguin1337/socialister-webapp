@@ -31,7 +31,7 @@ export async function me() {
   if (!jwt.value) {
     return null;
   }
-  const { send } = useRequest('GET', '/api/auth/me');
+  const { send } = useRequest('GET', '/api/users/me');
   user.value = await send();
   return user.value;
 }

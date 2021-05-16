@@ -40,10 +40,4 @@ export class AuthController {
     request.res.setHeader('Set-Cookie', ['Refresh=; HttpOnly; Path=/api/auth/refresh; Max-Age=0']);
     return true;
   }
-
-  @HttpCode(200)
-  @Get('me')
-  async me(@Req() request: RequestWithUser) {
-    return request.user;
-  }
 }

@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Req } from '@nestjs/common';
+import { RequestWithUser } from 'src/auth/requestWithUser.interface';
 import { UsersService } from './users.service';
 
 @Controller('/api/users')
@@ -10,5 +11,11 @@ export class UsersController {
   @Post()
   create(@Body() payload: any) {
     return this.users.create(payload);
+  }
+
+  @HttpCode(200)
+  @Get('me')
+  me(@Req() request: RequestWithUser) {
+    return request.user;
   }
 }
