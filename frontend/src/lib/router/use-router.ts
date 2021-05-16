@@ -1,6 +1,5 @@
 import { useRouteResolver } from './use-route-matcher';
 import { useCurrentUrl } from './use-current-url';
-import { useRouteLink } from './use-route-link';
 import { useRouteLoader } from './use-route-loader';
 
 type SvelteComponent = any;
@@ -17,7 +16,6 @@ export function createRouter(routes: RouteDef[]) {
   const { url } = useCurrentUrl();
   const { resolve, reverse } = useRouteResolver(routes);
   const { route, load, loading: routing } = useRouteLoader();
-  const { routeLink } = useRouteLink({ route, getUrl, navigate });
 
   async function updateRoute() {
     const match = resolve(url.value);
@@ -54,7 +52,6 @@ export function createRouter(routes: RouteDef[]) {
     route,
     routing,
     navigate,
-    routeLink,
     getUrl,
     start,
   };

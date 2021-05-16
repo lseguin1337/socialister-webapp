@@ -1,4 +1,4 @@
-import { createRouter } from '../lib/router';
+import { createRouter, useRouteLink } from '../lib/router';
 import { user } from '../composables/user';
 
 // Main Router
@@ -81,4 +81,5 @@ export const router = createRouter([
   },
 ]);
 
-export const { routing, routeLink, navigate } = router;
+export const { routing, navigate } = router;
+export const { routeLink } = useRouteLink(router);
