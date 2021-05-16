@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "ls node_modules",
+    "postinstall": "pwd && ls",
+    "prebuild": "ls",
     "build": "NODE_ENV=production webpack",
     "serve": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
