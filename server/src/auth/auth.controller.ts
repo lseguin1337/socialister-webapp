@@ -1,16 +1,16 @@
 import { ClassSerializerInterceptor, Controller, Get, HttpCode, Post, Req, UseGuards, UseInterceptors } from '@nestjs/common';
 import { RequestWithUser } from './requestWithUser.interface';
 import { LocalAuthGuard } from './local-auth.guard';
-import { AuthenticationService } from './authentication.service';
+import { AuthService } from './auth.service';
 import { config } from 'src/config';
 import { JwtRefreshGuard } from './jwt-refresh.guard';
 import { Public } from './public.decorator';
 
 @Controller('api/auth')
 @UseInterceptors(ClassSerializerInterceptor)
-export class AuthenticationController {
+export class AuthController {
   constructor(
-    private authService: AuthenticationService,
+    private authService: AuthService,
   ) {}
 
   @Public()

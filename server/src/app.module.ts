@@ -4,7 +4,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './config';
-import { AuthenticationModule } from './authentication/authentication.module';
+import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -22,7 +22,7 @@ import { UsersModule } from './users/users.module';
       synchronize: true,
     }),
     UsersModule,
-    AuthenticationModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

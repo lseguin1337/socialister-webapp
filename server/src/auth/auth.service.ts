@@ -6,7 +6,7 @@ import { UsersService } from '../users/users.service';
 import { TokenPayload } from './tokenPayload.interface';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,

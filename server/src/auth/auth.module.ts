@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AuthenticationService } from './authentication.service';
-import { AuthenticationController } from './authentication.controller';
+import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
@@ -20,16 +20,16 @@ import { JwtRefreshTokenStrategy } from './jwt-refresh.strategy';
       signOptions: { expiresIn: `${config.jwt.accessExpirationTime}s` },
     }),
   ],
-  controllers: [AuthenticationController],
+  controllers: [AuthController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
-    AuthenticationService,
+    AuthService,
     LocalStrategy,
     JwtStrategy,
     JwtRefreshTokenStrategy,
   ],
 })
-export class AuthenticationModule {}
+export class AuthModule {}
