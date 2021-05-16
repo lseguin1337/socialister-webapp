@@ -24,7 +24,6 @@
   }
 
   .BoardLayout--left-menu {
-    width: 200px;
     height: 100%;
   }
 
