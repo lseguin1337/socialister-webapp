@@ -9,4 +9,7 @@
 </Container>
 
 <style>
+  .BlogLayout--container {
+    padding: 0px 20px;
+  }
 </style>
