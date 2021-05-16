@@ -16,11 +16,11 @@
   .LeftNav--container {
     position: sticky;
     top: 75px;
-    width: 50px;
+    width: 48px;
     transition: width 0.2s;
   }
 
-  @media (min-width: 680px) {
+  @media screen and (min-width: 680px) {
     .LeftNav--container {
       width: 200px;
     }
