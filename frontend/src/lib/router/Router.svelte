@@ -1,8 +1,7 @@
 <script lang="typescript">
   export let router: any;
 
-  $: router?.start();
-  $: route = router.route;
+  $: route = router?.route;
 </script>
 
 <section>

@@ -4,12 +4,14 @@
   import { router } from './routes';
   import { me } from './composables/user';
 
-  const loading$ = me().catch(() => {});
+  const loading$ = me()
+    .catch(() => {})
+    .then(() => router.start());
 </script>
 
 <main>
   {#await loading$}
-    Loading...
+    <!-- empty -->
   {:then _}
     <div class="App--header">
       <NavBar></NavBar>
