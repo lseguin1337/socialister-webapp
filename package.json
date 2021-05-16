@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/lseguin1337/socialister-webapp/issues"
   },
-  "homepage": "https://github.com/lseguin1337/socialister-webapp#readme"
+  "homepage": "https://github.com/lseguin1337/socialister-webapp#readme",
+  "engines": {
+    "node": "12.16.1"
+  }
 }
