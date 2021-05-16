@@ -1,2 +1,2 @@
-cd frontend && npm i;
-cd server && npm i;
+(cd frontend && npm i);
+(cd server && npm i);
