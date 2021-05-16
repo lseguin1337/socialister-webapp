@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { migrations } from './migrations';
 
 @Module({
   imports: [
@@ -18,6 +19,8 @@ import { UsersModule } from './users/users.module';
     }),
     TypeOrmModule.forRoot({
       ...config.database,
+      migrations,
+      migrationsRun: true,
       autoLoadEntities: true,
       synchronize: true,
     }),
