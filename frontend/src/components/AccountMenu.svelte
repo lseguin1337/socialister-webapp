@@ -16,7 +16,7 @@
     <div class="AccountMenu--backdrop" on:click={() => isOpen = !isOpen}></div>
     <div class="AccountMenu--dropdown">
       <csm-dropdown-list> 
-        <csm-select-item left-icon="user">My Account</csm-select-item>
+        <csm-select-item left-icon="user" use:routeLink={'account'}>My Account</csm-select-item>
         <csm-select-item left-icon="quantify" use:routeLink={'overview'}>Analyse</csm-select-item>
         <csm-select-divider></csm-select-divider>
         <csm-select-item left-icon="cancel" on:click={() => logout()}>Disconnect</csm-select-item>

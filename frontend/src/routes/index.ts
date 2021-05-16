@@ -38,6 +38,12 @@ export const router = createRouter([
     loader: () => import('./SignupPage.svelte').then(m => m.default),
   },
   {
+    name: 'account',
+    path: '/account',
+    guards: [authGuard],
+    loader: () => import('./AccountPage.svelte').then(m => m.default),
+  },
+  {
     name: 'settings',
     path: '/settings',
     guards: [authGuard],
