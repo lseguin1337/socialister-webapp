@@ -15,9 +15,11 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
     private readonly userService: UsersService,
   ) {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => request?.cookies?.Refresh]),
+      jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
+        console.log('REFRESH COKKIE 2', request.cookies);
+        return request?.cookies?.Refresh;
+      }]),
       secretOrKey: config.jwt.refreshSecret,
-      passReqToCallback: true,
     });
   }
  

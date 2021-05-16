@@ -2,9 +2,9 @@ import { ClassSerializerInterceptor, Controller, Get, HttpCode, Post, Req, UseGu
 import { RequestWithUser } from './requestWithUser.interface';
 import { LocalAuthGuard } from './local-auth.guard';
 import { AuthenticationService } from './authentication.service';
-import { JwtAuthGuard } from './jwt-auth.guard';
 import { config } from 'src/config';
 import { JwtRefreshGuard } from './jwt-refresh.guard';
+import { Public } from './public.decorator';
 
 @Controller('api/auth')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -13,6 +13,7 @@ export class AuthenticationController {
     private authService: AuthenticationService,
   ) {}
 
+  @Public()
   @HttpCode(200)
   @UseGuards(LocalAuthGuard)
   @Post('login')
@@ -24,18 +25,25 @@ export class AuthenticationController {
     return { access_token };
   }
 
-  @HttpCode(200)
-  @UseGuards(JwtAuthGuard)
-  @Get('me')
-  async me(@Req() request: RequestWithUser) {
-    return request.user;
-  }
-
+  @Public()
   @HttpCode(200)
   @UseGuards(JwtRefreshGuard)
   @Post('refresh')
   async refresh(@Req() request: RequestWithUser) {
     const { access_token } = await this.authService.accessToken(request.user);
     return { access_token };
+  }
+
+  @HttpCode(200)
+  @Post('logout')
+  async logout(@Req() request: RequestWithUser) {
+    request.res.setHeader('Set-Cookie', ['Refresh=; HttpOnly; Path=/api/auth/refresh; Max-Age=0']);
+    return true;
+  }
+
+  @HttpCode(200)
+  @Get('me')
+  async me(@Req() request: RequestWithUser) {
+    return request.user;
   }
 }

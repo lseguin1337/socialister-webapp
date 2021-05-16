@@ -9,6 +9,7 @@ import { config } from '../config';
 import { PassportModule } from '@nestjs/passport';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { JwtRefreshTokenStrategy } from './jwt-refresh.strategy';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
     AuthenticationService,
     LocalStrategy,
     JwtStrategy,
+    JwtRefreshTokenStrategy,
   ],
 })
 export class AuthenticationModule {}
