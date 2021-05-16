@@ -11,7 +11,10 @@ interface DatabaseConfig {
 
 export const config = {
   port: parseInt(process.env.PORT, 10) || 3000,
-  database: env.database as DatabaseConfig,
+  database: {
+    ...env.database as DatabaseConfig,
+    ...(process.env.DB_HOST ? { host: process.env.DB_HOST } : {}),
+  },
   jwt: {
     ...env.jwt,
     refreshExpirationTime: 3600 * 24, // 1 Jour
