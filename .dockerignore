@@ -1,0 +1,10 @@
+.git
+.cache
+
+env.json
+
+node_modules/
+dist/
+
+*.spec.ts
+*.md
