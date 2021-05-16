@@ -23,6 +23,7 @@ import { migrations } from './migrations';
       migrationsRun: true,
       autoLoadEntities: true,
       synchronize: true,
+      logging: ["query", "error"],
     }),
     UsersModule,
     AuthModule,
