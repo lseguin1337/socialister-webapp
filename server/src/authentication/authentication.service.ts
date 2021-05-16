@@ -1,7 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { config } from 'src/config';
 import { User } from 'src/users/user.entity';
 import { UsersService } from '../users/users.service';
+import { TokenPayload } from './tokenPayload.interface';
 
 @Injectable()
 export class AuthenticationService {
@@ -19,10 +21,24 @@ export class AuthenticationService {
     return user;
   }
 
-  async login(user: User) {
+  async refreshToken(user: User) {
     const payload: TokenPayload = { username: user.username, userId: user.id };
+    const refresh_token = this.jwtService.sign(payload, { 
+      secret: config.jwt.refreshSecret,
+      expiresIn: `${config.jwt.refreshExpirationTime}s`,
+    });
+
     return {
-      access_token: this.jwtService.sign(payload),
+      refresh_token,
+    };
+  }
+
+  async accessToken(user: User) {
+    const payload: TokenPayload = { username: user.username, userId: user.id };
+    const access_token = this.jwtService.sign(payload);
+
+    return {
+      access_token,
     };
   }
 }

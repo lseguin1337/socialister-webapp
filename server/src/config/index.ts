@@ -13,9 +13,8 @@ export const config = {
   port: parseInt(process.env.PORT, 10) || 3000,
   database: env.database as DatabaseConfig,
   jwt: {
-    refreshSecret: '',
-    refreshExpirationTime: '',
-    accessSecret: 'myfuckingsecret',
-    accessExpirationTime: 3600
+    ...env.jwt,
+    refreshExpirationTime: 3600 * 24, // 1 Jour
+    accessExpirationTime: 120 // 2 min
   }
 };

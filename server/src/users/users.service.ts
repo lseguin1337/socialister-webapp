@@ -31,6 +31,7 @@ export class UsersService {
     user.username = userp.username;
     user.password = userp.password;
     user.email = userp.email;
+    user.roles = userp.roles || [];
     return this.usersRepository.insert(user);
   }
 }
