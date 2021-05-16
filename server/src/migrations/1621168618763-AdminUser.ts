@@ -11,7 +11,7 @@ export class AdminUser1621168618763 implements MigrationInterface {
         admin.email = process.env.ADMIN_EMAIL || 'admin@support.com';
         admin.roles = ['admin'];
         
-        await queryRunner.query("INSERT INTO user (username, password, salt, email, roles) VALUES (?, ?, ?, ?, ?)", [
+        await queryRunner.query(`INSERT INTO "user" (username, password, salt, email, roles) VALUES (?, ?, ?, ?, ?)`, [
             admin.username,
             admin.password,
             admin.salt,
@@ -21,7 +21,7 @@ export class AdminUser1621168618763 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query("DELETE FROM user WHERE username = ?", ['admin']);
+        await queryRunner.query(`DELETE FROM "user" WHERE username = ?`, ['admin']);
     }
 
 }
