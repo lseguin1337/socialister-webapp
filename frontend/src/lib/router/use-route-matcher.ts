@@ -21,7 +21,7 @@ export function useRouteResolver<T extends Route>(routes: T[]) {
     for (const item of perparedRoutes) {
       const params = item.routeMatcher.match(url);
       if (params) {
-        return { current: item.routeDef, params };
+        return { route: item.routeDef, params };
       }
     }
     return null;

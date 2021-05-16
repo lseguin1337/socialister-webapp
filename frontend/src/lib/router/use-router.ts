@@ -20,17 +20,17 @@ export function createRouter(routes: RouteDef[]) {
   const { routeLink } = useRouteLink({ route, getUrl, navigate });
 
   async function updateRoute() {
-    const { current, params } = resolve(url.value);
-    if (!current) {
+    const match = resolve(url.value);
+    if (!match) {
       // TODO: 404 strategy?
       route.value = null;
       return;
     }
-    if (current.guards?.some(guard => !guard())) {
+    if (match.route.guards?.some(guard => !guard())) {
       // do nothing move rejected
       return;
     }
-    await load(current, params);
+    await load(match.route, match.params);
   }
 
   function getUrl(routeName: string, params?: any) {
