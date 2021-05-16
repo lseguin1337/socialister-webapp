@@ -1,3 +1,20 @@
+
+function parseUrl(url: string) {
+  const u = new URL(url);
+  return {
+    type: u.protocol.replace(/:$/, ''),
+    host: u.hostname,
+    port: u.port,
+    username: u.username,
+    password: u.password,
+    database: u.pathname.replace(/^\//, ''),
+  };
+}
+
+const database = process.env.DATABASE_URL
+  ? parseUrl(process.env.DATABASE_URL)
+  : {};
+
 export const config = {
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {
@@ -7,10 +24,7 @@ export const config = {
     username: "root",
     password: "root",
     database: "test",
-    ...(process.env.DB_HOST ? { host: process.env.DB_HOST } : {}),
-    ...(process.env.DB_DATABASE ? { database: process.env.DB_DATABASE } : {}),
-    ...(process.env.DB_USERNAME ? { username: process.env.DB_USERNAME } : {}),
-    ...(process.env.DB_PASSWORD ? { password: process.env.DB_PASSWORD } : {}),
+    ...database,
   },
   jwt: {
     refreshSecret: "**RefreshSecretToken**",
