@@ -11,7 +11,7 @@
 
 <main>
   {#await bootstrap$}
-    <!-- empty -->
+    <!-- Bootstrapping -->
   {:then _}
     <div class="App--header">
       <NavBar></NavBar>

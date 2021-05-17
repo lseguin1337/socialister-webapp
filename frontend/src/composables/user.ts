@@ -13,8 +13,7 @@ jwt.subscribe((value) => {
 });
 
 export async function login(username: string, password: string) {
-  const { send } = useRequest('POST', '/api/auth/login');
-  const { access_token } = await send({ username, password });
+  const { access_token } = await useRequest('POST', '/api/auth/login').send({ username, password });
   jwt.value = access_token;
   const user = await me();
   router.navigate('overview');
@@ -22,16 +21,14 @@ export async function login(username: string, password: string) {
 }
 
 export async function logout() {
-  const { send } = useRequest('POST', '/api/auth/logout');
-  await send();
+  await useRequest('POST', '/api/auth/logout').send();
   jwt.value = null;
   user.value = null;
   router.navigate('login');
 }
 
 export async function refresh() {
-  const { send } = useRequest('POST', '/api/auth/refresh');
-  const { access_token } = await send();
+  const { access_token } = await useRequest('POST', '/api/auth/refresh').send();
   jwt.value = access_token;
 }
 
@@ -39,7 +36,6 @@ export async function me() {
   if (!jwt.value) {
     return null;
   }
-  const { send } = useRequest('GET', '/api/users/me');
-  user.value = await send();
+  user.value = await useRequest('GET', '/api/users/me').send();
   return user.value;
 }
