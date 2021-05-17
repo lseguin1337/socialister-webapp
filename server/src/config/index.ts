@@ -21,6 +21,8 @@ const database = process.env.DATABASE_URL
   ? parseUrl(process.env.DATABASE_URL)
   : {};
 
+console.log('access_secret', process.env.ACCESS_SECRET);
+
 export const config = {
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {

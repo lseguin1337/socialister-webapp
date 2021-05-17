@@ -20,7 +20,7 @@ export class AdminUser1621168618763 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DELETE FROM "user" WHERE "username" = ?`, ['admin']);
+        await queryRunner.query(`DELETE FROM "user" WHERE "username" = $1`, ['admin']);
     }
 
 }
