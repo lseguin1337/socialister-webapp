@@ -34,6 +34,7 @@ export class AuthController {
     return { access_token };
   }
 
+  @Public()
   @HttpCode(200)
   @Post('logout')
   async logout(@Req() request: RequestWithUser) {
