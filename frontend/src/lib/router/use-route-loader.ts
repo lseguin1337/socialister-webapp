@@ -14,11 +14,16 @@ export function useRouteLoader() {
   async function load(def: RouteDef, params: any) {
     try {
       loading.value = true;
-      return (route.value = {
+      const [props, Component] = await Promise.all([
+        def.paramsToProps ? def.paramsToProps(params) : Promise.resolve(params),
+        def.loader(),
+      ]);
+      route.value = {
         name: def.name,
-        props: def.paramsToProps ? await def.paramsToProps(params) : params,
-        Component: await def.loader(),
-      });
+        props,
+        Component,
+      };
+      return route.value;
     } finally {
       loading.value = false;
     }

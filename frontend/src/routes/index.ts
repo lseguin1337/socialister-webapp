@@ -72,7 +72,8 @@ export const router = createRouter([
     path: '/population/:popId',
     guards: [authGuard],
     paramsToProps: async ({ popId }) => {
-      // load popId
+      // simulate data fetching
+      await new Promise(resolve => setTimeout(resolve, 800));
       return {
         pop: { id: popId },
       };
