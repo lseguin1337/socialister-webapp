@@ -35,7 +35,7 @@
 <style>
   @keyframes loading {
     from { border-top-color: rgb(75, 138, 231); }
-    to   { border-top-color: #fff; }
+    to   { border-top-color: rgb(145, 175, 220); }
   }
   .Nav--container {
     width: 100%;
@@ -47,7 +47,7 @@
   }
 
   .Nav--container.loading {
-    animation: .1s linear 0s infinite alternate loading;
+    animation: .5s linear 0s infinite alternate loading;
   }
 
   nav {

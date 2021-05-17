@@ -4,13 +4,13 @@
   import { router } from './routes';
   import { me } from './composables/user';
 
-  const loading$ = me()
+  const bootstrap$ = me()
     .catch(() => {})
     .then(() => router.start());
 </script>
 
 <main>
-  {#await loading$}
+  {#await bootstrap$}
     <!-- empty -->
   {:then _}
     <div class="App--header">
