@@ -16,7 +16,6 @@ export class UsersController {
   @HttpCode(200)
   @Get('me')
   me(@Req() request: RequestWithUser) {
-    console.log('access_secret', process.env.ACCESS_SECRET);
     return request.user;
   }
 }
