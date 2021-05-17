@@ -1,4 +1,3 @@
-
 function parseUrl(url: string) {
   const u = new URL(url);
   return {
@@ -21,6 +20,11 @@ const database = process.env.DATABASE_URL
   ? parseUrl(process.env.DATABASE_URL)
   : {};
 
+const secrets = {
+  ...(process.env.REFRESH_SECRET ? { refreshSecret: process.env.REFRESH_SECRET } : {}),
+  ...(process.env.ACCESS_SECRET ? { accessSecret: process.env.ACCESS_SECRET } : {}),
+};
+
 export const config = {
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {
@@ -33,11 +37,10 @@ export const config = {
     ...database,
   },
   jwt: {
-    refreshSecret: "**RefreshSecretToken**",
-    accessSecret: "**AccessSecretToken**",
+    refreshSecret: "**DefaultRefreshSecretToken**",
+    accessSecret: "**DefaultAccessSecretToken**",
     refreshExpirationTime: 3600 * 24, // 1 Jour
     accessExpirationTime: 120, // 2 min
-    ...(process.env.REFRESH_SECRET ? { refreshSecret: process.env.REFRESH_SECRET } : {}),
-    ...(process.env.ACCESS_SECRET ? { password: process.env.ACCESS_SECRET } : {}),
+    ...secrets,
   }
 };
