@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { config } from 'src/config';
-import { User } from 'src/users/user.entity';
+import { config } from '../config';
+import { User } from '../users/user.entity';
 import { UsersService } from '../users/users.service';
 import { TokenPayload } from './tokenPayload.interface';
 
@@ -14,7 +14,6 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.getByUsername(username);
-
     if (user.password !== User.hashPassword(user.salt, password)) {
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
@@ -23,11 +22,10 @@ export class AuthService {
 
   async refreshToken(user: User) {
     const payload: TokenPayload = { username: user.username, userId: user.id };
-    const refresh_token = this.jwtService.sign(payload, { 
+    const refresh_token = this.jwtService.sign(payload, {
       secret: config.jwt.refreshSecret,
       expiresIn: `${config.jwt.refreshExpirationTime}s`,
     });
-
     return {
       refresh_token,
     };
@@ -35,8 +33,10 @@ export class AuthService {
 
   async accessToken(user: User) {
     const payload: TokenPayload = { username: user.username, userId: user.id };
-    const access_token = this.jwtService.sign(payload);
-
+    const access_token = this.jwtService.sign(payload, {
+      secret: config.jwt.accessSecret,
+      expiresIn: `${config.jwt.accessExpirationTime}s`,
+    });
     return {
       access_token,
     };
